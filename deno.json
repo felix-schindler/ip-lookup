@@ -1,0 +1,13 @@
+{
+	"tasks": {
+		"start": "deno run --allow-net --allow-read main.ts",
+		"dev": "deno run --allow-net --allow-read --watch main.ts"
+	},
+	"fmt": {
+		"useTabs": true
+	},
+	"unstable": [
+		"byonm"
+	],
+	"lock": false
+}
