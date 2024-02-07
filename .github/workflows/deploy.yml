@@ -1,13 +1,9 @@
 name: Deploy
-on:
-  push:
-    branches: main
-  pull_request:
-    branches: main
+on: [main]
 
 jobs:
-  deploy_frontend:
-    name: Deploy Frontend
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
 
     permissions:
