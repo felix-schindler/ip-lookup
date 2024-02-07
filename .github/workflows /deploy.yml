@@ -1,0 +1,33 @@
+name: Deploy
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  deploy_frontend:
+    name: Deploy Frontend
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Upload frontend to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: "ip-lookup"
+          entrypoint: "main.ts"
