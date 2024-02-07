@@ -23,6 +23,11 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: latest
+
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
