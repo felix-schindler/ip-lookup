@@ -2,7 +2,7 @@ import { lookup } from "npm:geoip-lite@1.4.9";
 
 Deno.serve((_req: Request, connInfo: Deno.ServeHandlerInfo) => {
 	const ip = connInfo.remoteAddr.hostname;
-	const ipInfo = lookup("64.32.17.130");
+	const ipInfo = lookup(ip);
 
 	if (ipInfo !== null && ipInfo !== undefined) {
 		const {
