@@ -1,4 +1,4 @@
-import { lookup } from "npm:geoip-lite@1.4.9";
+import { lookup } from "geoip-lite";
 
 Deno.serve((_req: Request, connInfo: Deno.ServeHandlerInfo) => {
 	const ip = connInfo.remoteAddr.hostname;
