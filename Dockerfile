@@ -1,27 +1,13 @@
-# Based on https://github.com/denoland/deno_docker/blob/main/alpine.dockerfile
+FROM denoland/deno:alpine
 
-ARG DENO_VERSION=1.44.2
-ARG BIN_IMAGE=denoland/deno:bin-${DENO_VERSION}
-FROM ${BIN_IMAGE} AS bin
+# The port that your application listens to.
+EXPOSE 8000
 
-FROM frolvlad/alpine-glibc:alpine-3.13
+# Set the working directory inside the container (could be any directory)
+WORKDIR /app
 
-RUN apk --no-cache add ca-certificates
-
-RUN addgroup --gid 1000 deno \
-  && adduser --uid 1000 --disabled-password deno --ingroup deno \
-  && mkdir /deno-dir/ \
-  && chown deno:deno /deno-dir/
-
-ENV DENO_DIR /deno-dir/
-ENV DENO_INSTALL_ROOT /usr/local
-
-ARG DENO_VERSION
-ENV DENO_VERSION=${DENO_VERSION}
-COPY --from=bin /deno /bin/deno
-
-WORKDIR /deno-dir
+# Copy all files to the working directory
 COPY . .
 
-ENTRYPOINT ["/bin/deno"]
+# Start app
 CMD ["task", "start"]
