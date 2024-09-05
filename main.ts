@@ -13,6 +13,7 @@ Deno.serve((req: Request, connInfo: Deno.ServeHandlerInfo) => {
 	}
 
 	return Response.json({
+		headers: Object.fromEntries(req.headers),
 		ip,
 		info: lookup(ip),
 	});
